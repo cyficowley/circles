@@ -1,32 +1,58 @@
+@font-face{
+  font-family: 'Colfax';
+  src: url('./fonts/colfaxMedium.ttf')
+  
+}
+html{
+  background-color: #1B1B1D;
+  height: 100vh;
+}
+#name{
+  color:#fff; 
+  font-family: 'Colfax'
+}
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  color:#fff;
+  width:100vw;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
 }
-
-.App-link {
-  color: #61dafb;
+.Login{
+  padding:50px;
+  height:100vh;
+  animation:Gradient 8s ease infinite;
+  background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
+  background-size: 500% 500%;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#login-button{
+  background-color: rgba(0,0,0,0.4);
+  margin:10px;
+  margin-left:0px;
+  
+}
+.login-field input[type=text]:focus{
+  border-bottom: 1px solid #aaa;
+} 
+#password{
+  -webkit-text-security: disc;
+  -moz-text-security: disc;
+}
+input{
+  color:#fff;
+}
+@keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
 }

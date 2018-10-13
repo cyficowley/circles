@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-loader": "^8.0.0-beta.0",
     "bootstrap": "^3.3.7",
+    "firebase": "^5.5.4",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",

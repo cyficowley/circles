@@ -11,6 +11,12 @@ html{
   color:#fff; 
   font-family: 'Colfax'
 }
+#begin-button{
+
+  margin:10px;
+  background-color: gray;
+
+}
 .App {
   text-align: center;
   color:#fff;

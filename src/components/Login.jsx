@@ -13,7 +13,7 @@ class Login extends Component {
 				<input className="login-field" type="text" placeholder="Username"></input>
 				<input id="password" className="login-field" type="text" placeholder="Password"></input>
 				<Link to="/account"><a id="login-button" class="waves-effect waves-light btn">Login</a></Link>
-				<Link to="/signup"><a id="login-button" class="waves-effect waves-light btn">Sign Up</a></Link>
+				<Link to="/account"><a id="login-button" class="waves-effect waves-light btn">Sign Up</a></Link>
 			</div>
     );
   }

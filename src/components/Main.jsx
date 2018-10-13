@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import '../css/main.css';
+import Landing from './Landing.jsx'
+import Login from './Login.jsx'
+import symbol from '../symbol.svg'
+import { BrowserRouter } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
+
 
 class Main extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <BrowserRouter>
+        <div>
+          <Route exact path="/" component={Landing} />
+          <Route path="/login" component={Login} />
+        </div>
+      </BrowserRouter>
+
     );
   }
 }

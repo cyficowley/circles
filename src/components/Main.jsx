@@ -4,6 +4,7 @@ import Landing from './Landing.jsx'
 import Login from './Login.jsx'
 import Account from './Account.jsx'
 import symbol from '../symbol.svg'
+import Connect from './Connect.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router-dom'
 
@@ -16,6 +17,7 @@ class Main extends Component {
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
+          <Route path="/connect" component={Connect} />
         </div>
       </BrowserRouter>
 

@@ -21,8 +21,34 @@ def parse_results(html):
     urlList = []
     for URL in soup.find_all('cite'):
         urlList.append(URL.text)
-    return urlList
+
+    facebookList = []
+    twitterList = []
+    githubList = []
+    linkedinList = []
+
+    for url in urlList:
+        if "facebook.com" in url:
+            facebookList.append(url)
+        elif "twitter.com" in url:
+            twitterList.append(url)
+        elif "linkedin.com" in url:
+            linkedinList.append(url)
+        elif "github.com" in url:
+            githubList.append(url)
+    
+    accountUrls = [{"Facebook" : facebookList}, {"Twitter" : twitterList}, {"Github" : githubList}, {"Linkedin" : linkedinList}]
+
+    # extract images from facebook links
+
+    for url in facebookList:
+        if "/public/" not in url:
+            r = requests.get(url)
+            facebookHtml = r.content
+            facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
+            return facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"}).img['src']
+    #return accountUrls
  
 if __name__ == '__main__':
-    keyword, html = fetch_results('Ian Carrasco', 20, 'en')
+    keyword, html = fetch_results('Cyrus Cowley', 20, 'en')
     print(parse_results(html))

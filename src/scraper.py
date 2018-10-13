@@ -47,8 +47,7 @@ def parse_results(html):
         facebookHtml = r.content
         facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
         facebookImage = facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"}).img['src']
-        #return facebookImage
-    #return accountUrls
+        print(facebookImage)
 
     for url in twitterList:
         r = requests.get(url)
@@ -56,8 +55,16 @@ def parse_results(html):
         twitterSoup = BeautifulSoup(twitterHtml, 'html.parser')
         twitterImage = twitterSoup.find('div', {"class": "ProfileAvatar"}).img['src']
         print(twitterImage)
+
+    for url in githubList:
+        r = requests.get(url)
+        githubHtml = r.content
+        githubSoup = BeautifulSoup(githubHtml, 'html.parser')
+        githubImage = githubSoup.find_all('a', {"class" : "u-photo d-block position-relative"})
+        for each in githubImage:
+            print(each.img['src'])
     return
  
 if __name__ == '__main__':
-    keyword, html = fetch_results('Shane Folden', 20, 'en')
+    keyword, html = fetch_results('Ian Carrasco', 20, 'en')
     print(parse_results(html))

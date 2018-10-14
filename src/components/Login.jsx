@@ -12,8 +12,8 @@ class Login extends Component {
 				<h3 id="name">Circles</h3>
 				<input className="login-field" type="text" placeholder="Username"></input>
 				<input id="password" className="login-field" type="text" placeholder="Password"></input>
-				<Link to="/account" class="login-button waves-effect waves-light btn">Login</Link>
-				<Link to="/signup/1" class="login-button waves-effect waves-light btn">Sign Up</Link>
+				<Link to="/account" className="login-button waves-effect waves-light btn">Login</Link>
+				<Link to="/signup/1" className="login-button waves-effect waves-light btn">Sign Up</Link>
 			</div>
     );
   }

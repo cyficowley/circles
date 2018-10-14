@@ -29,6 +29,36 @@ html{
   background-color: gray;
 
 }
+.devider{
+  width: 100vw;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+.YEET{
+  font-size: 1.2rem;
+}
+.Connect{
+  color:white;
+  min-height: 100vh !important;
+  height: auto !important;
+}
+.item{
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 30px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.item p{
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+.item a{
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  color:#fff;
+  text-decoration: underline;
+}
 .App {
   text-align: center;
   color:#fff;

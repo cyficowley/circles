@@ -61,7 +61,6 @@ export default class Signup extends Component {
 			case 2:
 
 				fetch("http://localhost:5000/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
-
 					result.json().then((data) => {
 
 						if(this.state.userAccounts.length === 0){
@@ -76,7 +75,8 @@ export default class Signup extends Component {
 					<div className="Login">
 						<h4 id="subtext">2 | Social Accounts</h4>
 						<h4 id="subtext">Suggested</h4>
-						{this.state.userAccounts.map(account => {
+						{this.state.userAccounts && 
+							this.state.userAccounts.map(account => {
 							let objKey = Object.keys(account)[0]
 							let accountName = account[objKey][0]
 							
@@ -113,7 +113,7 @@ export default class Signup extends Component {
 						<h3 id="name">3 | Other accounts</h3>
 						<h4 id="subtext">Add Accounts</h4>
 						<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
-						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
+						<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
 					</div>
 				)
 		}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import { domainToUnicode } from 'url';
 import database from "../utils/utils.js"
+import Cookies from 'universal-cookie';
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
@@ -210,7 +211,7 @@ export default class Signup extends Component {
 						userAccounts[key] = data[key]
 					})
 					return (
-						<Circles accounts={userAccounts} prevPage={this.prevPage} firstName={this.state.firstName} lastName={this.state.lastName}/>
+						<Circles accounts={userAccounts} history={this.props.history} firstName={this.state.firstName} lastName={this.state.lastName} updateUID={this.props.updateUID}/>
 					)
 		}
 	}
@@ -230,6 +231,7 @@ export default class Signup extends Component {
 class Circles extends Component {
 	constructor(props){
 		super(props)
+    this.cookies = new Cookies();
 		this.state = {
 			circles:{},
 			selected:""
@@ -283,7 +285,14 @@ class Circles extends Component {
 			circles[circle] = temp
 		})
 		database.addUser(uid,circles)
-		setTimeout(() => {window.location.href = "/home"}, 500);
+		this.props.updateUID(uid)
+		if(this.cookies.get('connections')){
+			let connections = this.cookies.get('connections');
+			Object.keys(connections).forEach((other_uid) =>{
+				database.addConnection(uid,other_uid,Object.keys(connections.other_uid))
+			})
+		}
+		setTimeout(() => {this.props.history.push("/circles")}, 500);
 	}
 
 	render = () => {

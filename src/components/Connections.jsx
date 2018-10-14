@@ -74,7 +74,7 @@ class Connections extends Component {
         </div>
         <div style={{marginLeft:"10px",marginRight:"10px"}}>
           <Link to="/" className="login-button waves-effect waves-light btn">Home</Link>
-          <Link to="/home" className="login-button waves-effect waves-light btn">Share Circles</Link>
+          <Link to="/circles" className="login-button waves-effect waves-light btn">Share Circles</Link>
           {!this.props.uid && 
             <Link to="/signup" className="login-button waves-effect waves-light btn">Sign up to save connections</Link>
           }

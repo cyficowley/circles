@@ -2,6 +2,7 @@
   "name": "circles",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://skrishnan99.github.io/circles_hosting/",
   "dependencies": {
     "animated": "^0.2.2",
     "babel-loader": "^8.0.0-beta.0",

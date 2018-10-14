@@ -14,8 +14,9 @@ class Circles extends Component {
   }
 
   generateLink = (circle) => {
-    console.log("http://localhost:3000/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle)
-    return "http://localhost:3000/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle
+    let url = window.location.href
+    url = url.slice(0, url.indexOf("/", 8))
+    return url + "/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle
   }
 
   getCircles() {

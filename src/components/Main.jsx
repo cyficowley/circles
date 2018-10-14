@@ -28,7 +28,7 @@ class Main extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Route exact path="/" component={Landing} />
+          <Route exact path="/" component={Landing} basename={process.env.PUBLIC_URL} />
           <Route path="/login" component={(props) => <Login history={props.history} updateUID={this.updateUID}/>} />
           <Route path="/account" component={(props) => <Account history={props.history}/>} />
           <Route path="/connect" component={() => <Connect uid={this.state.uid}/>} />

@@ -82,7 +82,10 @@ class Connect extends Component {
           {rows}
         </div>
         <div style={{marginLeft:"10px",marginRight:"10px"}}>
-          <Link to="/" className="login-button waves-effect waves-light btn">Home</Link>
+          {this.props.uid ?
+            <Link to="/Circles" className="login-button waves-effect waves-light btn">Home</Link>:
+            <Link to="/" className="login-button waves-effect waves-light btn">Home</Link>
+          }
           <Link to="/connections" className="login-button waves-effect waves-light btn">See All Connections</Link>
         </div>
 			</div>

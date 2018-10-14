@@ -18,9 +18,7 @@ class Account extends Component {
   }
   handleScan(data) {
     if (data) {
-      this.setState({
-        result: data
-      });
+      window.location.href = data;
     }
   }
   handleError(err) {

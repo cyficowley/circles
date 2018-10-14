@@ -17,6 +17,7 @@ def fetch_results(search_term, number_results, language_code):
     return search_term, response.text
 
 def parse_results(html):
+    assert html != None, 'input html cannot be of Nonetype'
     soup = BeautifulSoup(html, 'html.parser')
     urlList = []
     for URL in soup.find_all('cite'):
@@ -37,27 +38,51 @@ def parse_results(html):
             linkedinList.append(url)
         elif "github.com" in url:
             githubList.append(url)
-    
-    accountUrls = [{"Facebook" : facebookList}, {"Twitter" : twitterList}, {"Github" : githubList}, {"Linkedin" : linkedinList}]
 
-    # extract images from facebook links
+    facebookUrl = None
+    twitterUrl = None
+    githubUrl = None
+    linkedinUrl = None
 
-    for url in facebookList:
-        r = requests.get(url)
-        facebookHtml = r.content
-        facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
-        facebookImage = facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"}).img['src']
-        #return facebookImage
-    #return accountUrls
+    facebookImage = None
+    twitterImage = None
+    githubImage = None
+    linkedinImage = None
 
-    for url in twitterList:
-        r = requests.get(url)
-        twitterHtml = r.content
-        twitterSoup = BeautifulSoup(twitterHtml, 'html.parser')
-        twitterImage = twitterSoup.find('div', {"class": "ProfileAvatar"}).img['src']
-        print(twitterImage)
-    return
+    if len(facebookList) > 0:
+        facebookUrl = facebookList[0]
+        facebookHtml = requests.get(facebookUrl).content
+        if facebookHtml != None:
+            facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
+            facebookImageTag = facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"})
+            if facebookImageTag != None:
+                facebookImage = facebookImageTag.img['src']
+
+    if len(twitterList) > 0:
+        twitterUrl = twitterList[0]
+        twitterHtml = requests.get(twitterUrl).content
+        if twitterHtml != None:
+            twitterSoup = BeautifulSoup(twitterHtml, 'html.parser')
+            twitterImageTag = twitterSoup.find('div', {"class": "ProfileAvatar"})
+            if twitterImageTag != None:
+                twitterImage = twitterImageTag.img['src']
+
+    if len(githubList) > 0:
+        
+        githubUrl = githubList[0]
+        githubHtml = requests.get(githubUrl).content    
+        if githubHtml != None: 
+            githubSoup = BeautifulSoup(githubHtml, 'html.parser')
+            githubImageTag= githubSoup.find_all('a', {"class" : "u-photo d-block position-relative"})
+            if len(githubImageTag) > 0:
+                githubImageTag = githubImageTag[0]
+                githubImage = githubImageTag.img['src']
+    if len(linkedinList) > 0:
+        linkedinUrl = linkedinList[0]
+
+    accountInfo = [{"Facebook" : [facebookUrl, facebookImage]}, {"Twitter" : [twitterUrl, twitterImage]}, {"Github" : [githubUrl, githubImage]}, {"Linkedin" : [linkedinUrl, linkedinImage]}]
+    return accountInfo
  
 if __name__ == '__main__':
-    keyword, html = fetch_results('Shane Folden', 20, 'en')
+    keyword, html = fetch_results('Roshan Fernando', 20, 'en')
     print(parse_results(html))

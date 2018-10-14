@@ -107,7 +107,8 @@ html{
 	background: rgba(0,0,0,0.77);
 }
 .landing-bg{
-
+  width:100vw;
+  height: 30vh;
   background-color: #0D9CFD;
 
 
@@ -118,6 +119,9 @@ html{
   align-items: center;
   flex-direction: row;
   overflow: hidden;
+}
+.headerthing h3{
+  font-size: 2rem !important;
 }
 .Login{
   padding:20px;

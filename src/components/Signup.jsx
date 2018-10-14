@@ -37,6 +37,9 @@ export default class Signup extends Component {
 		console.log(account)
 		
 	}
+	gotoPage = (link) =>{
+		window.location.href = link
+	}
 	renderStep = (page) => {
 		switch(page){
 			case 1:
@@ -87,7 +90,7 @@ export default class Signup extends Component {
 							
 							return(
 								<div onClick={this.toggleCard(account)} className="accountCard">
-									<a href={accountName}></a><img className="accountCardImage" src={account[objKey][1]}></img>
+									<img onClick={this.gotoPage(accountName)} className="accountCardImage" src={account[objKey][1]}></img>
 									<h3>{objKey}<br/><h5>{accountName1}</h5></h3>
 								</div>
 								)

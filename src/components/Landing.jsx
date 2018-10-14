@@ -9,14 +9,12 @@ class Landing extends Component {
     return (
 			<div>
 				<div className="headerthing">
-					<img style={{float:"left", transform:"scale(.5)"}} src={symbol}></img>
-					<h3>Circles</h3>
+					<img style={{float:"left", transform:"scale(.4)"}} src={symbol}></img>
+					<h3 style={{marginLeft:'-20px'}}>Circles</h3>
 				</div>
 				<div className="App">
-					<div className="landing-bg">
-						<br />
-						<h1>Discover your Circle</h1>
-					</div>	
+					<br />
+					<h1>Discover your Circle</h1>
 					<div style={{marginTop:"20vh"}}>
 					<Link to="/login" className="landing-button login-button waves-effect waves-light btn"><span>Account</span></Link>
 					<Link to="/account" className="landing-button login-button waves-effect waves-light btn"><span>Scan</span></Link>

@@ -27,7 +27,7 @@ class Main extends Component {
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
           <Route path="/connect" component={Connect} />
-          <Route path="/signup/:step" component={Signup}/>
+          <Route path="/signup" component={Signup}/>
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
           <Route path="/qrgenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />
           <Route path="/home" component={Home} />

@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 export default class Signup extends Component {
 	constructor(props){
-
 		super(props)
-		this.state = {pageNo:parseInt(this.props.match.params.step), firstName:"", lastName:"", profile:{}, userAccounts:[]}
+		this.state = {pageNo:1, firstName:"", lastName:"", profile:{}, userAccounts:[]}
 	}
 	componentWillMount = () => {
 
@@ -37,9 +36,17 @@ export default class Signup extends Component {
 		console.log(account)
 		
 	}
-	gotoPage = (link) =>{
-		window.location.href = link
+
+	nextPage = () => {
+		let pageNo = this.state.pageNo + 1;
+		this.setState({pageNo:pageNo})
 	}
+
+	prevPage = () => {
+		let pageNo = this.state.pageNo - 1;
+		this.setState({pageNo:pageNo})
+	}
+
 	renderStep = (page) => {
 		switch(page){
 			case 1:
@@ -48,7 +55,7 @@ export default class Signup extends Component {
 						<h4 id="subtext">1 | Name</h4>
 						<input className="login-field" onChange={this.firstNameChange} type="text" placeholder="First Name" value={this.state.firstName}></input>
 						<input className="login-field" onChange={this.lastNameChange} type="text" placeholder="Last Name" value={this.state.lastName}></input>
-						<Link to={{pathname:"/signup/2", state:this.state}} className="login-button waves-effect waves-light btn">Next</Link>
+						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
 			case 2:
@@ -96,17 +103,17 @@ export default class Signup extends Component {
 								)
 							}
 						})}
-						<Link to="/signup/1" className="login-button waves-effect waves-light btn">Back</Link>
-						<Link to="/signup/3" className="login-button waves-effect waves-light btn">Next</Link>
+						<a onClick={() => {this.prevPage(); this.setState({userAccounts:undefined})}} className="login-button waves-effect waves-light btn">Back</a>
+						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
 			case 3:
 				return (
 					<div className="Login">
-						<h3 id="name">Welcome to Circles</h3>
+						<h3 id="name">3 | Other accounts</h3>
 						<h4 id="subtext">Add Accounts</h4>
-						<Link to="/signup/1" className="login-button waves-effect waves-light btn">Back</Link>
-						<Link to="/signup/3" className="login-button waves-effect waves-light btn">Next</Link>
+						<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
+						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
 		}

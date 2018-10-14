@@ -8,7 +8,7 @@ class Connect extends Component {
   constructor(props){
     super(props);
     this.state = {data:undefined}
-    this.getData(this.props.location.search);
+    this.getData(window.location.href);
     this.cookies = new Cookies();
   }
 

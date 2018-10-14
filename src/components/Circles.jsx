@@ -51,17 +51,19 @@ class Circles extends Component {
 
     return (
 		<div className="Connect Login" style={{padding:0}}>
-        <h3 id="subtext" className="circles-home-name">{this.props.uid.replace(/\b\w/g, l => l.toUpperCase()) + "'s Circles"}</h3>
-        <div className="grid-container">
-            {
-                displayRows.map(circle => {
-                    return (
-                        <div className="circle-item">{circle.name}</div>
-                    )
-                })
-            }
+            <h3 id="subtext" className="circles-home-name">{this.props.uid.replace(/\b\w/g, l => l.toUpperCase()) + "'s Circles"}</h3>
+            <div className="grid-container">
+                {
+                    displayRows.map(circle => {
+                        return (
+                          <Link to={{ pathname: '/QRGenerator', state: { url: this.generateLink(circle.name) }}}>
+                            <div className="circle-item">{circle.name}</div>
+                          </Link>
+                        )
+                    })
+                }
+            </div>
         </div>
-			</div>
     );
   }
 }

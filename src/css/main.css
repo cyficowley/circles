@@ -106,6 +106,12 @@ html{
 .App .landing-button span:hover{
 	background: rgba(0,0,0,0.77);
 }
+.landing-bg{
+
+  background-color: #0D9CFD;
+
+
+}
 .headerthing{
   color: white;
   display: flex;
@@ -114,8 +120,11 @@ html{
   overflow: hidden;
 }
 .Login{
-  padding:50px;
+  padding:20px;
   height:100vh;
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
   animation:Gradient 8s ease infinite;
   background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
   background-size: 500% 500%;
@@ -129,6 +138,33 @@ html{
   margin:10px;
   margin-left:0px;
   
+}
+.accountCard{
+
+  width:80vw;
+  height:80px;
+  display: flex;
+  justify-self: flex-start;
+  justify-content: flex-start;
+  color:#fff;
+  font-size: 1rem !important;
+
+}
+.accountCard h3{
+
+  font-size: 1.3rem;
+}
+.accountCard h5{
+  margin-top:1px;
+  margin-left: 2px;
+  font-size: 1.1rem;
+}
+.accountCardImage{
+  margin:10px;
+  width:60px;
+  height:60px;
+  border-radius: 50%;
+  justify-self: flex-start;
 }
 .login-field input[type=text]:focus{
   border-bottom: 1px solid #aaa;

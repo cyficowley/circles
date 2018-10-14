@@ -13,9 +13,14 @@ class Landing extends Component {
 					<h3>Circles</h3>
 				</div>
 				<div className="App">
-					<h1>Discover your Circle</h1>
+					<div className="landing-bg">
+						<br />
+						<h1>Discover your Circle</h1>
+					</div>	
+					<div style={{marginTop:"20vh"}}>
 					<Link to="/login" className="landing-button login-button waves-effect waves-light btn"><span>Account</span></Link>
 					<Link to="/account" className="landing-button login-button waves-effect waves-light btn"><span>Scan</span></Link>
+					</div>
 				</div>
 			</div>
     );

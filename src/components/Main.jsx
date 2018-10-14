@@ -31,6 +31,8 @@ class Main extends Component {
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
           <Route path="/qrgenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />
           <Route path="/home" component={Home} />
+          <Route path="/landing" component={Landing} />
+
         </div>
       </BrowserRouter>
 

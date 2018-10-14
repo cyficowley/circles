@@ -17,9 +17,12 @@ class Connect extends Component {
     let uid = params.get("uid")
     let circle = params.get("circle")
     if(this.props.uid){
+      console.log("yo what the shit dicks")
       database.addConnection(this.props.uid, uid, circle)
+      this.setState({data:data, uid:uid, circle:circle})
     }
     database.getConnection(uid, circle, (data) =>{
+      console.log("bruv")
       let connections = {}
       if(this.cookies.get('connections')){
         connections = this.cookies.get('connections');

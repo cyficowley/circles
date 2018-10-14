@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import database from "../utils/utils.js"
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
@@ -129,7 +130,7 @@ export default class Signup extends Component {
 					)
 				case 4:
 					return (
-						<Circles accounts={this.state.userAccounts}/>
+						<Circles accounts={this.state.userAccounts} firstName={this.state.firstName} lastName={this.state.lastName}/>
 					)
 		}
 	}
@@ -151,7 +152,6 @@ class Circles extends Component {
 		super(props)
 		this.state = {
 			circles:{},
-			accounts:props.accounts,
 			selected:""
 		}
 	}
@@ -181,6 +181,27 @@ class Circles extends Component {
 		this.setState({circles:circles})
 	}
 
+	finished = () => {
+		let uid = this.props.firstName + " " + this.props.lastName
+		let circles = {}
+		Object.keys(this.state.circles).forEach((circle) => {
+			let temp = {}
+			this.state.circles[circle].forEach(account => {
+				let newList = []
+				this.props.accounts[account].forEach(data=>{
+					if(data){
+						newList.push(data)
+					}
+				})
+				if(newList.length !== 0){
+					temp[account] = this.props.accounts[account]
+				}
+			})
+			circles[circle] = temp
+		})
+		database.addUser(uid,circles)
+	}
+
 	render = () => {
 		let circles = []
 
@@ -198,7 +219,7 @@ class Circles extends Component {
 		})
 
 		let accounts = []
-		Object.keys(this.state.accounts).forEach((account) =>{
+		Object.keys(this.props.accounts).forEach((account) =>{
 			if(this.state.circles[this.state.selected] && this.state.circles[this.state.selected].includes(account)){
 				accounts.push(<div key={account} onClick={()=>{this.updateCircleSelection(account)}} className="account chosen" style={{backgroundColor:"rgba(255,255,255,0.3)", borderRadius:"10px"}}>
 					<p style={{paddingLeft:"10px"}}>{account}</p>
@@ -223,7 +244,7 @@ class Circles extends Component {
 				<h3 style={{color:"white"}}>Accounts</h3>
 				{accounts}
 				<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
-				<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
+				<a onClick={() => {this.finished()}} className="login-button waves-effect waves-light btn">Done</a>
 			</div>
 		)
 	}		

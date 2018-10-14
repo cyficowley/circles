@@ -44,23 +44,28 @@ const database = {
       let all_connection_data = {};
       let promises = [];
       let snapshot_val = snapshot.val();
-      console.log(snapshot_val);
       Object.keys(snapshot_val).forEach((other_uid) => {
         all_connection_data[other_uid] = {};
         let comment = snapshot_val[other_uid];
         all_connection_data["comment"] = comment;
         promises.push(db.ref(other_uid + '/connections/' + uid).once('value').then((circles_to_access) => {
           let circles_to_access_values = circles_to_access.val();
+          let innerPromises = []
           Object.keys(circles_to_access_values).forEach((key) =>{
             let circle = circles_to_access_values[key];
-            promises.push(db.ref(other_uid + '/circles/' + circle).once('value').then((circle_data) => {
+            innerPromises.push(db.ref(other_uid + '/circles/' + circle).once('value').then((circle_data) => {
               all_connection_data[other_uid] = Object.assign({}, all_connection_data[other_uid], circle_data.val());
             }))
           })
+          return innerPromises
         }));
       })
-
-      Promise.all(promises).then(callback(all_connection_data));
+      Promise.all(promises).then((innerPromises) =>{
+        let totalPromises = innerPromises.flat();
+        Promise.all(totalPromises).then(() =>{
+          callback(all_connection_data)
+        })
+      })
     });
   },
 

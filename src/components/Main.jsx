@@ -5,11 +5,17 @@ import Login from './Login.jsx'
 import Account from './Account.jsx'
 import symbol from '../symbol.svg'
 import Connect from './Connect.jsx'
+import Connections from './Connections.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router-dom'
 
 
 class Main extends Component {
+  constructor(props){
+    super(props)
+    this.state = {uid:"ian"}
+  }
+  
   render() {
     return (
       <BrowserRouter>
@@ -18,6 +24,7 @@ class Main extends Component {
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
           <Route path="/connect" component={Connect} />
+          <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
         </div>
       </BrowserRouter>
 

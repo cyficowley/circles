@@ -1,15 +1,27 @@
 @font-face{
-  font-family: 'Colfax';
-  src: url('./fonts/colfaxMedium.ttf')
+  font-family: 'ColfaxMedium';
+  src: url('./fonts/colfaxLight.ttf')
+  
+}
+@font-face{
+  font-family: 'ColfaxLight';
+  src: url('./fonts/colfaxLight.ttf')
   
 }
 html{
   background-color: #1B1B1D;
   height: 100vh;
+  font-family: 'ColfaxMedium' !important;
 }
 #name{
   color:#fff; 
-  font-family: 'Colfax'
+  font-family: 'ColfaxMedium'
+}
+#subtext{
+  color:#fff;
+  font-size:2rem;
+  font-family: 'ColfaxLight';
+  font-weight: 100;
 }
 #begin-button{
 

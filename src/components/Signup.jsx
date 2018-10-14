@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
-		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:[]}
+		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:undefined}
 	}
 	componentWillMount = () => {
 
@@ -25,16 +25,17 @@ export default class Signup extends Component {
 
 	}
 	listData = (data) => {
-
-		console.log(JSON.stringify(data))
-		this.setState({userAccounts:data.data})
-	
+		this.setState({userAccounts:data})	
 	}
 	toggleCard = (e, account) => {
 
 		console.log(e)
 		console.log(account)
 		
+	}
+
+	gotoPage = (link) => {
+		window.open(link, '_blank');
 	}
 
 	nextPage = () => {
@@ -59,50 +60,60 @@ export default class Signup extends Component {
 					</div>
 				)
 			case 2:
+					
+				if(!this.state.userAccounts){
+					let fake = {"Facebook":["https://www.facebook.com/ian.carrasco.92", "https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p320x320/38924326_10209758689724385_5704585307827994624_n.jpg?_nc_cat=101&oh=07e5fd0772dc9c567a0bab0b7c5f1b1f&oe=5C5DFF66"],
+							"Twitter" : ["https://twitter.com/ia_n_ai", "https://pbs.twimg.com/profile_images/1028139770474647552/ZtVPRnhO_400x400.jpg"], 
+							"Github" : ["https://github.com/IanCarrasco", undefined], 
+							"Linkedin" : [undefined, undefined]
+					}
+					setTimeout(() => {this.listData(fake)}, 500);
+					// fetch("http://localhost:5000/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
+					// 	result.json().then((data) => {
+	
+					// 		if(this.state.userAccounts.length === 0){
+					// 			this.listData(data)
+					// 		}
+					// 	})
+					// })
 
-				fetch("http://localhost:5000/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
-					result.json().then((data) => {
+					
+				}
+					
+				let accounts = [];
 
-						if(this.state.userAccounts.length === 0){
+				if(this.state.userAccounts){
+					Object.keys(this.state.userAccounts).forEach(account => {
+						console.log(this.state.userAccounts[account])
+					let accountName = this.state.userAccounts[account][0]
+					
 
-							this.listData(data)
+					if(accountName != null){
+						let accountName1 = accountName.substring(accountName.lastIndexOf('/')  + 1)
+						if (accountName1.lastIndexOf('?') != -1){
+
+							accountName1 = accountName1.substring(0, accountName1.lastIndexOf('?'))
+							
 						}
-					})
+						if(this.state.userAccounts[account][1] == null){
 
-				})
+							this.state.userAccounts[account][1] = "http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png"
+
+						}
+					
+						accounts.push(
+							<div key={account} onClick={this.toggleCard(account)} className="accountCard">
+								<img onClick={() => {this.gotoPage(accountName)}} className="accountCardImage" src={this.state.userAccounts[account][1]}></img>
+								<h3>{account}<br/><h5>{accountName1}</h5></h3>
+							</div>
+						)
+					}})}
 
 				return (
 					<div className="Login">
 						<h4 id="subtext">2 | Social Accounts</h4>
 						<h4 id="subtext">Suggested</h4>
-						{this.state.userAccounts && 
-							this.state.userAccounts.map(account => {
-							let objKey = Object.keys(account)[0]
-							let accountName = account[objKey][0]
-							
-
-							console.log(account[objKey])
-							if(accountName != null){
-								let accountName1 = accountName.substring(accountName.lastIndexOf('/')  + 1)
-								if (accountName1.lastIndexOf('?') != -1){
-
-									accountName1 = accountName1.substring(0, accountName1.lastIndexOf('?'))
-									
-								}
-								if(account[objKey][1] == null){
-
-									account[objKey][1] = "http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png"
-
-								}
-							
-							return(
-								<div onClick={this.toggleCard(account)} className="accountCard">
-									<img onClick={this.gotoPage(accountName)} className="accountCardImage" src={account[objKey][1]}></img>
-									<h3>{objKey}<br/><h5>{accountName1}</h5></h3>
-								</div>
-								)
-							}
-						})}
+						{accounts}
 						<a onClick={() => {this.prevPage(); this.setState({userAccounts:undefined})}} className="login-button waves-effect waves-light btn">Back</a>
 						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>

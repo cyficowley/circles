@@ -82,7 +82,10 @@ def parse_results(html):
     if len(linkedinList) > 0:
         linkedinUrl = linkedinList[0]
 
-    accountInfo = [{"Facebook" : [facebookUrl, facebookImage]}, {"Twitter" : [twitterUrl, twitterImage]}, {"Github" : [githubUrl, githubImage]}, {"Linkedin" : [linkedinUrl, linkedinImage]}]
+    accountInfo = {"Facebook" : [facebookUrl, facebookImage],
+                    "Twitter" : [twitterUrl, twitterImage],
+                    "Github" : [githubUrl, githubImage],
+                    "Linkedin" : [linkedinUrl, linkedinImage]}
     return accountInfo
 
 def scrape(search_term):

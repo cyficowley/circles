@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
  
 #USER_AGENT = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'}
  
- 
+
 def fetch_results(search_term, number_results, language_code):
     assert isinstance(search_term, str), 'Search term must be a string'
     assert isinstance(number_results, int), 'Number of results must be an integer'
@@ -82,7 +82,10 @@ def parse_results(html):
 
     accountInfo = [{"Facebook" : [facebookUrl, facebookImage]}, {"Twitter" : [twitterUrl, twitterImage]}, {"Github" : [githubUrl, githubImage]}, {"Linkedin" : [linkedinUrl, linkedinImage]}]
     return accountInfo
- 
-if __name__ == '__main__':
-    keyword, html = fetch_results('Roshan Fernando', 20, 'en')
-    print(parse_results(html))
+
+def scrape(search_term):
+    number_results = 20
+    language_code = 'en'
+    keyword, html = fetch_results(search_term, number_results, language_code)
+    return parse_results(html)
+

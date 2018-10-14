@@ -13,3 +13,4 @@ api.add_resource(getData, '/scraper/<userName>')
 
 if __name__ == '__main__':
      app.run()
+

@@ -16,6 +16,9 @@ class Connect extends Component {
     const params = new URLSearchParams(query);
     let uid = params.get("uid")
     let circle = params.get("circle")
+    if(this.props.uid){
+      database.addConnection(this.props.uid, uid, circle)
+    }
     database.getConnection(uid, circle, (data) =>{
       let connections = {}
       if(this.cookies.get('connections')){

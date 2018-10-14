@@ -20,7 +20,6 @@ class Main extends Component {
   }
 
   updateUID = (uid) => {
-    console.log("wtf")
     this.setState({uid:uid})
   }
   
@@ -32,11 +31,11 @@ class Main extends Component {
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={(props) => <Login history={props.history} updateUID={this.updateUID}/>} />
           <Route path="/account" component={Account} />
-          <Route path="/connect" component={Connect} />
+          <Route path="/connect" component={() => <Connect uid={this.state.uid}/>} />
           <Route path="/circles" component={() => <Circles uid={this.state.uid}/>} />
           <Route path="/signup" component={(props) => <Signup history={props.history} updateUID={this.updateUID}/>}/>
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
-          <Route path="/qrgenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />
+          <Route path="/qrgenerator" component={QRGenerator} />
           <Route path="/landing" component={Landing} />
 
         </div>

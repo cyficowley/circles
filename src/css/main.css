@@ -33,7 +33,6 @@ html{
   text-align: center;
   color:#fff;
   width:100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,6 +40,43 @@ html{
   overflow: hidden;
   padding-bottom: 100px;
 }
+.App h1{
+  font-family: 'ColfaxLight';
+  margin-bottom: 40px;
+}
+.App .landing-button{
+  font-size: 1.5rem !important;
+	background-image: linear-gradient(to right, #FF9C00 0%, #0D9CFD 100%);
+	border-radius: 30px;
+  box-sizing: border-box;
+	color: white;
+	display: block;
+	font: 1.125rem 'Oswald', Arial, sans-serif; /*18*/
+	height: 60px;
+	letter-spacing: 1px;
+	margin: 0 auto;
+  padding: 4px;
+  text-transform: none;
+	position: relative;
+  text-decoration: none;
+	width: 264px;
+  z-index: 2;
+  margin-top: 20px;
+}
+.App .landing-button span{
+	align-items: center;
+	background: rgba(0,0,0,0.87);
+	border-radius: 30px;
+	display: flex;
+	justify-content: center;
+  height: 100%;
+  transition: background .5s ease;
+	width: 100%;
+}
+.App .landing-button span:hover{
+	background: rgba(0,0,0,0.77);
+}
+
 .headerthing{
   color: white;
   display: flex;

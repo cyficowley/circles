@@ -27,10 +27,19 @@ export default class Signup extends Component {
 	}
 	listData = (data) => {
 
+		console.log(JSON.stringify(data))
 		this.setState({userAccounts:data.data})
 	
 	}
+	toggleCard = (e, account) => {
 
+		console.log(e)
+		console.log(account)
+		
+	}
+	gotoPage = (link) =>{
+		window.location.href = link
+	}
 	renderStep = (page) => {
 		switch(page){
 			case 1:
@@ -61,13 +70,31 @@ export default class Signup extends Component {
 						<h4 id="subtext">2 | Social Accounts</h4>
 						<h4 id="subtext">Suggested</h4>
 						{this.state.userAccounts.map(account => {
+							let objKey = Object.keys(account)[0]
+							let accountName = account[objKey][0]
+							
+
+							console.log(account[objKey])
+							if(accountName != null){
+								let accountName1 = accountName.substring(accountName.lastIndexOf('/')  + 1)
+								if (accountName1.lastIndexOf('?') != -1){
+
+									accountName1 = accountName1.substring(0, accountName1.lastIndexOf('?'))
+									
+								}
+								if(account[objKey][1] == null){
+
+									account[objKey][1] = "http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png"
+
+								}
+							
 							return(
-							<div className="accountCard">
-
-								<img src={account[1]}></img>
-
-							</div>
-							)
+								<div onClick={this.toggleCard(account)} className="accountCard">
+									<img onClick={this.gotoPage(accountName)} className="accountCardImage" src={account[objKey][1]}></img>
+									<h3>{objKey}<br/><h5>{accountName1}</h5></h3>
+								</div>
+								)
+							}
 						})}
 						<Link to="/signup/1" className="login-button waves-effect waves-light btn">Back</Link>
 						<Link to="/signup/3" className="login-button waves-effect waves-light btn">Next</Link>

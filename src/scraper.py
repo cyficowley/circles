@@ -9,7 +9,7 @@ def fetch_results(search_term, number_results, language_code):
     assert isinstance(number_results, int), 'Number of results must be an integer'
     escaped_search_term = search_term.replace(' ', '+')
  
-    google_url = 'https://www.google.com/search?q={}&num={}&hl={}'.format(escaped_search_term, number_results, language_code)
+    google_url = 'https://cors.io/?https://www.google.com/search?q={}&num={}&hl={}'.format(escaped_search_term, number_results, language_code)
     #response = requests.get(google_url, headers=USER_AGENT)
     response = requests.get(google_url)
     response.raise_for_status()
@@ -55,6 +55,8 @@ def parse_results(html):
         if facebookHtml != None:
             facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
             facebookImageTag = facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"})
+            if facebookImageTag is None:
+                facebookImageTag = facebookSoup.find('div', {"class": "_4jhq"})
             if facebookImageTag != None:
                 facebookImage = facebookImageTag.img['src']
 

@@ -188,13 +188,18 @@ export default class Signup extends Component {
 						<input id="account-comment" className="login-field" type="text" placeholder="Comment"></input>
 
 						<button onClick={this.addAccount} className="login-button waves-effect waves-light btn">Add</button>
-						<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
+						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
 
 				case 4:
+					let userAccounts = {}
+					this.state.selectedAccounts.forEach((data) => {
+						let key = Object.keys(data)[0]
+						userAccounts[key] = data[key]
+					})
 					return (
-						<Circles accounts={this.state.userAccounts} firstName={this.state.firstName} lastName={this.state.lastName}/>
+						<Circles accounts={userAccounts} firstName={this.state.firstName} lastName={this.state.lastName}/>
 					)
 		}
 	}
@@ -264,6 +269,7 @@ class Circles extends Component {
 			circles[circle] = temp
 		})
 		database.addUser(uid,circles)
+		setTimeout(() => {window.location.href = "/home"}, 500);
 	}
 
 	render = () => {

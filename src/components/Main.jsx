@@ -15,7 +15,7 @@ import { Switch, Route } from 'react-router-dom'
 class Main extends Component {
   constructor(props){
     super(props)
-    this.state = {uid:undefined}
+    this.state = {uid:"ian"}
   }
   
   render() {

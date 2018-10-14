@@ -31,7 +31,13 @@ class Connect extends Component {
 
   render() {
     let rows = [];
+    let image = undefined;
     if(this.state.data){
+      Object.keys(this.state.data).forEach(key => {
+        if(this.state.data[key][2] && !image && key !== "comment"){
+          image = this.state.data[key][2];
+        }
+      })
       Object.keys(this.state.data).forEach(key => {
         rows.push(
           <div key={key} className="item">
@@ -50,7 +56,12 @@ class Connect extends Component {
 			<div className="Connect Login" style={{padding:0}}>
         <div style={{padding:"25px"}}>
           <div>Contact information for</div>
-          <h1 style={{margin:"0px"}}>{this.state.uid}</h1>
+          <div style={{overflow:"auto", display:"flex",alignItems:"center", width:"100%", justifyContent: "space-between"}}>
+            <h3 style={{margin:"0px", float:"left"}}>{this.state.uid}</h3>
+            {image && 
+            <img style={{borderRadius:"50%", width:"30%", float:"right", paddingRight:"10px"}} src={image}/>
+            }
+          </div>
         </div>
         <div style={{marginLeft:"10px",marginRight:"10px"}}>
           {rows}

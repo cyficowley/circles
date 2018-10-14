@@ -29,10 +29,22 @@ class Connections extends Component {
     let rows = [];
     if(this.state.data){
       Object.keys(this.state.data).forEach((person, index)=>{
+        let image = undefined;
+        Object.keys(this.state.data[person]).forEach(key => {
+          if(this.state.data[person][key][2] && !image && key !== "comment"){
+            image = this.state.data[person][key][2];
+          }
+        })
+
         rows.push(<div className="YEET" key={this.state.data[person]["comment"]}>
           <h3 style={{marginTop:0}}>{person}</h3>
-          {this.state.data[person]["comment"] &&
-          <p>{this.state.data[person]["comment"]}</p>}
+          <div className="row" style={{display:"flex",alignItems:"center"}}>
+            {image && 
+            <img style={{borderRadius:"50%", width:"30%", float:"left", paddingRight:"10px"}} src={image}/>
+            }
+            {this.state.data[person]["comment"] &&
+            <p style={{paddingLeft:"10px"}}>{this.state.data[person]["comment"]}</p>}
+          </div>
         </div>)
         delete this.state.data[person]["comment"]
         Object.keys(this.state.data[person]).forEach(key => {

@@ -13,24 +13,30 @@ class Connect extends Component {
   }
 
   getData = (query) => {
+    console.log(query)
     const params = new URLSearchParams(query);
-    let uid = params.get("uid")
+    console.log(params)
     let circle = params.get("circle")
-    if(this.props.uid){
-      console.log("yo what the shit dicks")
-      database.addConnection(this.props.uid, uid, circle)
-      this.setState({data:data, uid:uid, circle:circle})
-    }
+    let uid = params.get("uid")
+    console.log(uid)
     database.getConnection(uid, circle, (data) =>{
-      console.log("bruv")
-      let connections = {}
-      if(this.cookies.get('connections')){
-        connections = this.cookies.get('connections');
+      console.log(uid)
+      console.log(circle)
+      console.log(data)
+      if(!this.props.uid){
+        let connections = {}
+        if(this.cookies.get('connections')){
+          connections = this.cookies.get('connections');
+        }
+        let combine_data = {}
+        combine_data[uid] = data
+        connections = Object.assign({}, connections, combine_data)
+        this.cookies.set('connections', connections, { path: '/' });
       }
-      let combine_data = {}
-      combine_data[uid] = data
-      connections = Object.assign({}, connections, combine_data)
-      this.cookies.set('connections', connections, { path: '/' });
+      else{
+        database.addConnection(this.props.uid, uid, circle)
+      }
+      
       this.setState({data:data, uid:uid, circle:circle})
     })
   }

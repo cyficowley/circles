@@ -13,6 +13,10 @@ class Circles extends Component {
     this.name = "";
   }
 
+  generateLink = (circle) => {
+    return "http://localhost:3000/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle
+  }
+
   getCircles() {
     database.getPersonalData(this.props.uid, (data)=>{
       this.setState({data:data})

@@ -7,7 +7,6 @@ import Signup from './Signup.jsx'
 import symbol from '../symbol.svg'
 import Circles from './Circles.jsx';
 import Connect from './Connect.jsx'
-import Home from './Home.jsx'
 import Connections from './Connections.jsx'
 import QRGenerator from './QRGenerator.jsx'
 import { BrowserRouter } from 'react-router-dom'
@@ -38,7 +37,6 @@ class Main extends Component {
           <Route path="/signup" component={(props) => <Signup history={props.history} updateUID={this.updateUID}/>}/>
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
           <Route path="/qrgenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />
-          <Route path="/home" component={Home} />
           <Route path="/landing" component={Landing} />
 
         </div>

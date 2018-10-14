@@ -9,7 +9,7 @@ class Login extends Component {
 
 	signin = () => {
 		this.props.updateUID(document.getElementById('username').value)
-		setTimeout(() => {this.props.history.push("/home")}, 500);
+		setTimeout(() => {this.props.history.push("/circles")}, 500);
 	}
   render() {
     return (

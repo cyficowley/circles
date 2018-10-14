@@ -6,6 +6,7 @@ import Account from './Account.jsx'
 import symbol from '../symbol.svg'
 import Connect from './Connect.jsx'
 import Connections from './Connections.jsx'
+import QRGenerator from './QRGenerator.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { Switch, Route } from 'react-router-dom'
 
@@ -25,6 +26,7 @@ class Main extends Component {
           <Route path="/account" component={Account} />
           <Route path="/connect" component={Connect} />
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
+          <Route path="/QRGenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />
         </div>
       </BrowserRouter>
 

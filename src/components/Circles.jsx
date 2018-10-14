@@ -61,6 +61,7 @@ class Circles extends Component {
         items.push(<li className="circle-link">{k}</li>)
       })
     }
+
     return (
 			<div className="Connect Login" style={{padding:0}}>
         <h3 className="circles-home-name">{this.props.uid + "'s Circles:"}</h3>

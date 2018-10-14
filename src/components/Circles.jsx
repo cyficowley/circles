@@ -16,7 +16,6 @@ class Circles extends Component {
     database.getPersonalData(this.props.uid, (data)=>{
       this.setState({data:data})
       var myCircles = this.state.data.circles;
-    //   console.log(myCircles, "YOOOOOOOO")
       this.setState({circles:myCircles});
     })
   }
@@ -35,17 +34,14 @@ class Circles extends Component {
      })
     }
     if (circleNames.length > 0) {
-        console.log(circleNames, "YOOOOOOOOOOOOOOOOOO");
         circleNames.forEach((circleName)=>{
             let allAccounts = []
             Object.keys(this.state.circles[circleName]).forEach((key)=>{
                 linkedAccounts[circleName] = key;
-                console.log(key, "ANNNNNNOOOOYYING");
                 allAccounts.push(key);
             })
             displayRows.push({name:circleName, accounts:allAccounts});
         })
-        console.log(linkedAccounts, "IT WORKS!!!!");
     }
 
     return (

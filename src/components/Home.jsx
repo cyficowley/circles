@@ -8,7 +8,7 @@ class Home extends Component {
   render() {
     return (
 		<div className="Login" style={{marginLeft:"0px", padding:"10px"}}>
-            <h3 style={{float:"left", padding:"0px", marginLeft:"0px", marginTop:"0px", fontSize:"1.5rem"}}> Fuck you!! </h3>
+      <h3 style={{float:"left", padding:"0px", marginLeft:"0px", marginTop:"0px", fontSize:"1.5rem"}}>  </h3>
 		</div>
     );
 	}

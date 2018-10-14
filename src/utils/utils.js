@@ -69,6 +69,12 @@ const database = {
     });
   },
 
+  getPersonalData(uid, callback) {
+    db.ref(uid).once('value').then((snapshot) => {
+      callback(snapshot.val())
+    });
+  },
+
   getConnection(uid, circle, callback) {
     db.ref(uid + '/circles/' + circle).once('value').then((circle_data) => {
       callback(circle_data.val());

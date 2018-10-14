@@ -21,6 +21,7 @@ class Connect extends Component {
     console.log(uid)
     database.getConnection(uid, circle, (data) =>{
       console.log(uid)
+      console.log(this.props.uid)
       console.log(circle)
       console.log(data)
       if(!this.props.uid){
@@ -36,7 +37,7 @@ class Connect extends Component {
       }
       else{
         console.log("added")
-        database.addConnection(this.props.uid, uid, circle)
+        database.addConnection(uid, this.props.uid, [circle], "")
       }
       
       this.setState({data:data, uid:uid, circle:circle})

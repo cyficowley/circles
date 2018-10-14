@@ -30,7 +30,7 @@ class Main extends Component {
         <div>
           <Route exact path="/" component={Landing} />
           <Route path="/login" component={(props) => <Login history={props.history} updateUID={this.updateUID}/>} />
-          <Route path="/account" component={Account} />
+          <Route path="/account" component={(props) => <Account history={props.history}/>} />
           <Route path="/connect" component={() => <Connect uid={this.state.uid}/>} />
           <Route path="/circles" component={() => <Circles uid={this.state.uid}/>} />
           <Route path="/signup" component={(props) => <Signup history={props.history} updateUID={this.updateUID}/>}/>

@@ -18,7 +18,7 @@ class Account extends Component {
   }
   handleScan(data) {
     if (data) {
-      window.location.href = data;
+      this.props.history.push(data.slice(data.indexOf("/", 8)))
     }
   }
   handleError(err) {

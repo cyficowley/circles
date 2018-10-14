@@ -31,8 +31,12 @@ const database = {
 
   //returns a promise that will give a url of the image on completion
   addConnection(uid, other_uid, circles, comment){
+    console.log(other_uid + '/connections/' + uid);
+    console.log(circles)
     db.ref(other_uid + '/connections/' + uid).update(circles);
-    db.ref(uid + '/connected_with').update({uid:comment});
+    let asdf = {}
+    asdf[other_uid] = comment
+    db.ref(uid + '/connected_with').update(asdf);
   },
 
   addUser(uid, circles){

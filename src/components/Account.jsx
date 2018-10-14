@@ -31,7 +31,7 @@ class Account extends Component {
           delay={this.state.delay}
           onError={this.handleError}
           onScan={this.handleScan}
-          style={{ width: "100%" }}
+          style={{ width: "100%"}}
         />
         <p style={{color:"#fff"}}>{this.state.result}</p>
       </div>

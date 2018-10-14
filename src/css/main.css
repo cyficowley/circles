@@ -61,6 +61,10 @@ html{
   margin-left:0px;
   
 }
+.Account{
+    background: Gradient 8s ease infinite;
+    background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
+}
 .login-field input[type=text]:focus{
   border-bottom: 1px solid #aaa;
 } 

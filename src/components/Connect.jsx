@@ -24,6 +24,7 @@ class Connect extends Component {
       console.log(circle)
       console.log(data)
       if(!this.props.uid){
+        console.log("didn't have a uid")
         let connections = {}
         if(this.cookies.get('connections')){
           connections = this.cookies.get('connections');
@@ -34,6 +35,7 @@ class Connect extends Component {
         this.cookies.set('connections', connections, { path: '/' });
       }
       else{
+        console.log("added")
         database.addConnection(this.props.uid, uid, circle)
       }
       

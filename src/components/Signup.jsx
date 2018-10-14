@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
-		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:[]}
+		this.state = {pageNo:1, firstName:"", lastName:"", suggestedAccounts:[], userAccounts:[]}
 	}
 	componentWillMount = () => {
 
@@ -27,13 +27,14 @@ export default class Signup extends Component {
 	listData = (data) => {
 
 		console.log(JSON.stringify(data))
-		this.setState({userAccounts:data.data})
+		this.setState({suggestedAccounts:data.data})
 	
 	}
 	toggleCard = (e, account) => {
 
 		console.log(e)
 		console.log(account)
+	
 		
 	}
 
@@ -76,7 +77,7 @@ export default class Signup extends Component {
 						<h4 id="subtext">2 | Social Accounts</h4>
 						<h4 id="subtext">Suggested</h4>
 						{this.state.userAccounts && 
-							this.state.userAccounts.map(account => {
+							this.state.suggestedAccounts.map(account => {
 							let objKey = Object.keys(account)[0]
 							let accountName = account[objKey][0]
 							
@@ -97,7 +98,7 @@ export default class Signup extends Component {
 							
 							return(
 								<div onClick={this.toggleCard(account)} className="accountCard">
-									<img onClick={this.gotoPage(accountName)} className="accountCardImage" src={account[objKey][1]}></img>
+									<img className="accountCardImage" src={account[objKey][1]}></img>
 									<h3>{objKey}<br/><h5>{accountName1}</h5></h3>
 								</div>
 								)

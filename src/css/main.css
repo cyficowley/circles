@@ -76,7 +76,6 @@ html{
 .App .landing-button span:hover{
 	background: rgba(0,0,0,0.77);
 }
-
 .headerthing{
   color: white;
   display: flex;
@@ -91,15 +90,15 @@ html{
   background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
   background-size: 500% 500%;
 }
+.scan{
+    margin: 0 auto;
+    display: flex;
+}
 .login-button{
   background-color: rgba(0,0,0,0.4) !important;
   margin:10px;
   margin-left:0px;
   
-}
-.Account{
-    background: Gradient 8s ease infinite;
-    background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
 }
 .login-field input[type=text]:focus{
   border-bottom: 1px solid #aaa;

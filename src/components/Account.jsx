@@ -26,14 +26,17 @@ class Account extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="Login">
         <QrReader
           delay={this.state.delay}
           onError={this.handleError}
           onScan={this.handleScan}
           style={{ width: "100%"}}
         />
-        <p style={{color:"#fff"}}>{this.state.result}</p>
+        {/* <p style={{color:"#fff"}}>{this.state.result}</p> */}
+        <div className = "scan">
+        <Link style={{margin:"0 auto", marginTop: "50px", fontSize: "24px"}} to="/" class="login-button waves-effect waves-light btn">GET OUT</Link>
+        </div>
       </div>
     );
 	}

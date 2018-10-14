@@ -9,7 +9,7 @@ class Login extends Component {
   render() {
     return (
 			<div className="Login">
-				<h3 id="name">Circles</h3>
+				<Link to="/"><h3 id="name">Circles</h3></Link>
 				<input className="login-field" type="text" placeholder="Username"></input>
 				<input id="password" className="login-field" type="text" placeholder="Password"></input>
 				<Link to="/account" class="login-button waves-effect waves-light btn">Login</Link>

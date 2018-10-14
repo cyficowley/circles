@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import { domainToUnicode } from 'url';
+import database from "../utils/utils.js"
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
-		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:undefined}
+		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:undefined, selectedAccounts:[]}
 	}
 	componentWillMount = () => {
 
@@ -25,12 +27,53 @@ export default class Signup extends Component {
 
 	}
 	listData = (data) => {
+		console.log(JSON.stringify(data))
+		Object.keys(data).forEach( account => {
+
+			data[account].splice(1,0,"")
+			
+		})
+
+		console.log(data)
 		this.setState({userAccounts:data})	
+	}
+	contains = (a, obj) => {
+    var i = a.length;
+    while (i--) {
+       if (JSON.stringify(a[i]) == JSON.stringify(obj)) {
+           return true;
+       }
+    }
+    return false;
 	}
 	toggleCard = (e, account) => {
 
-		console.log(e)
-		console.log(account)
+		console.log(this.contains(this.state.selectedAccounts, account))
+
+		if(!this.contains(this.state.selectedAccounts, account)){
+			
+			this.setState({selectedAccounts:this.state.selectedAccounts.concat(account)})
+			e.target.style.backgroundColor = "rgba(0,0,0,0.4)"
+		
+		}
+		else{
+
+			let array = this.state.selectedAccounts
+
+			array.splice(array.indexOf(account), 1)
+
+			console.log('hey wtf')
+
+			console.log(array)
+
+			this.setState({selectedAccounts:array})
+
+			e.target.style.backgroundColor = "rgba(0,0,0,0)"
+
+		}
+		console.log(this.state.selectedAccounts)
+
+	
 		
 	}
 
@@ -47,6 +90,23 @@ export default class Signup extends Component {
 		let pageNo = this.state.pageNo - 1;
 		this.setState({pageNo:pageNo})
 	}
+	addAccount = () => {
+
+		let name = document.getElementById('account-type').value
+		let url = document.getElementById('account-url').value 
+		let comment = document.getElementById('account-comment').value 
+
+		let account = {}
+		account[name] = [url, "", comment]
+
+		this.setState({selectedAccounts:this.state.selectedAccounts.concat(account)})
+
+		document.getElementById('account-type').value = ""
+		document.getElementById('account-url').value = ""
+		document.getElementById('account-comment').value = ""
+
+	}
+
 
 	renderStep = (page) => {
 		switch(page){
@@ -71,9 +131,8 @@ export default class Signup extends Component {
 					// fetch("http://localhost:5000/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
 					// 	result.json().then((data) => {
 	
-					// 		if(this.state.userAccounts.length === 0){
 					// 			this.listData(data)
-					// 		}
+							
 					// 	})
 					// })
 
@@ -84,7 +143,7 @@ export default class Signup extends Component {
 
 				if(this.state.userAccounts){
 					Object.keys(this.state.userAccounts).forEach(account => {
-						console.log(this.state.userAccounts[account])
+					
 					let accountName = this.state.userAccounts[account][0]
 					
 
@@ -95,15 +154,16 @@ export default class Signup extends Component {
 							accountName1 = accountName1.substring(0, accountName1.lastIndexOf('?'))
 							
 						}
-						if(this.state.userAccounts[account][1] == null){
+						if(this.state.userAccounts[account][2] == null){
 
-							this.state.userAccounts[account][1] = "http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png"
+							this.state.userAccounts[account][2] = "http://busybridgeng.com/wp-content/uploads/2017/05/generic-avatar.png"
 
 						}
-					
+						let asdf = {}
+						asdf[account] = this.state.userAccounts[account]
 						accounts.push(
-							<div key={account} onClick={this.toggleCard(account)} className="accountCard">
-								<img onClick={() => {this.gotoPage(accountName)}} className="accountCardImage" src={this.state.userAccounts[account][1]}></img>
+							<div key={account} onClick={(e) => {this.toggleCard(e, asdf)}} className="accountCard">
+								<img onClick={() => {this.gotoPage(accountName)}} className="accountCardImage" src={this.state.userAccounts[account][2]}></img>
 								<h3>{account}<br/><h5>{accountName1}</h5></h3>
 							</div>
 						)
@@ -118,18 +178,28 @@ export default class Signup extends Component {
 						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
-				case 3:
-					return (
-						<div className="Login">
-							<h3 id="name">3 | Other accounts</h3>
-							<h4 id="subtext">Add Accounts</h4>
-							<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
-							<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
-						</div>
-					)
+			case 3:
+				return (
+					<div className="Login">
+						<h3 id="name">3 | Other Accounts</h3>
+						<h4 id="subtext">Add Accounts</h4>
+						<input id="account-type" className="login-field" type="text" placeholder="Account Type (i.e. Facebook, Instagram)"></input>
+						<input id="account-url" className="login-field" type="text" placeholder="Url"></input>
+						<input id="account-comment" className="login-field" type="text" placeholder="Comment"></input>
+
+						<button onClick={this.addAccount} className="login-button waves-effect waves-light btn">Add</button>
+						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
+					</div>
+				)
+
 				case 4:
+					let userAccounts = {}
+					this.state.selectedAccounts.forEach((data) => {
+						let key = Object.keys(data)[0]
+						userAccounts[key] = data[key]
+					})
 					return (
-						<Circles accounts={this.state.userAccounts}/>
+						<Circles accounts={userAccounts} firstName={this.state.firstName} lastName={this.state.lastName}/>
 					)
 		}
 	}
@@ -151,7 +221,6 @@ class Circles extends Component {
 		super(props)
 		this.state = {
 			circles:{},
-			accounts:props.accounts,
 			selected:""
 		}
 	}
@@ -181,6 +250,28 @@ class Circles extends Component {
 		this.setState({circles:circles})
 	}
 
+	finished = () => {
+		let uid = this.props.firstName + " " + this.props.lastName
+		let circles = {}
+		Object.keys(this.state.circles).forEach((circle) => {
+			let temp = {}
+			this.state.circles[circle].forEach(account => {
+				let newList = []
+				this.props.accounts[account].forEach(data=>{
+					if(data){
+						newList.push(data)
+					}
+				})
+				if(newList.length !== 0){
+					temp[account] = this.props.accounts[account]
+				}
+			})
+			circles[circle] = temp
+		})
+		database.addUser(uid,circles)
+		setTimeout(() => {window.location.href = "/home"}, 500);
+	}
+
 	render = () => {
 		let circles = []
 
@@ -198,7 +289,7 @@ class Circles extends Component {
 		})
 
 		let accounts = []
-		Object.keys(this.state.accounts).forEach((account) =>{
+		Object.keys(this.props.accounts).forEach((account) =>{
 			if(this.state.circles[this.state.selected] && this.state.circles[this.state.selected].includes(account)){
 				accounts.push(<div key={account} onClick={()=>{this.updateCircleSelection(account)}} className="account chosen" style={{backgroundColor:"rgba(255,255,255,0.3)", borderRadius:"10px"}}>
 					<p style={{paddingLeft:"10px"}}>{account}</p>
@@ -223,7 +314,7 @@ class Circles extends Component {
 				<h3 style={{color:"white"}}>Accounts</h3>
 				{accounts}
 				<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
-				<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
+				<a onClick={() => {this.finished()}} className="login-button waves-effect waves-light btn">Done</a>
 			</div>
 		)
 	}		

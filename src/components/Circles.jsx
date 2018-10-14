@@ -59,7 +59,7 @@ class Circles extends Component {
       const x = Object.keys(this.state.circles);
       x.forEach((k)=>{
         items.push(<li className="circle-link">{k}</li>)
-      }
+      })
     }
     return (
 			<div className="Connect Login" style={{padding:0}}>

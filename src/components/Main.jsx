@@ -5,6 +5,7 @@ import Login from './Login.jsx'
 import Account from './Account.jsx'
 import Signup from './Signup.jsx'
 import symbol from '../symbol.svg'
+import Circles from './Circles.jsx';
 import Connect from './Connect.jsx'
 import Home from './Home.jsx'
 import Connections from './Connections.jsx'
@@ -27,6 +28,7 @@ class Main extends Component {
           <Route path="/login" component={Login} />
           <Route path="/account" component={Account} />
           <Route path="/connect" component={Connect} />
+          <Route path="/circles" component={() => <Circles uid={this.state.uid}/>} />
           <Route path="/signup" component={Signup}/>
           <Route path="/connections" component={() => <Connections uid={this.state.uid}/>} />
           <Route path="/qrgenerator" component={() => <QRGenerator url="https://www.cyruscowley.com"/>} />

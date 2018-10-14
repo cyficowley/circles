@@ -55,6 +55,8 @@ def parse_results(html):
         if facebookHtml != None:
             facebookSoup = BeautifulSoup(facebookHtml, 'html.parser')
             facebookImageTag = facebookSoup.find('div', {"class": "_1nv3 _1nv5 profilePicThumb"})
+            if facebookImageTag is None:
+                facebookImageTag = facebookSoup.find('div', {"class": "_4jhq"})
             if facebookImageTag != None:
                 facebookImage = facebookImageTag.img['src']
 

@@ -11,7 +11,7 @@ api = Api(app)
  
 class getData(Resource):
     def get(self, userName):
-        return {'data': scraper.scrape(userName)}
+        return scraper.scrape(userName)
 
 api.add_resource(getData, '/scraper/<userName>')
 

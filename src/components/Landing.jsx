@@ -14,7 +14,7 @@ class Landing extends Component {
 				</div>
 				<div className="App">
 					<br />
-					<h1>Discover your Circle</h1>
+					<h1>Connect Smarter</h1>
 					<div style={{marginTop:"20vh"}}>
 					<Link to="/login" className="landing-button login-button waves-effect waves-light btn"><span>Account</span></Link>
 					<Link to="/account" className="landing-button login-button waves-effect waves-light btn"><span>Scan</span></Link>

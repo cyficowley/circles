@@ -11,7 +11,7 @@ def fetch_results(search_term, number_results, language_code):
  
     google_url = 'https://www.google.com/search?q={}&num={}&hl={}'.format(escaped_search_term, number_results, language_code)
     #response = requests.get(google_url, headers=USER_AGENT)
-    response = requests.get(google_url, proxies={'http':"209.97.171.231:80", 'https':"209.97.171.231:80"})
+    response = requests.get(google_url)
     response.raise_for_status()
  
     return search_term, response.text

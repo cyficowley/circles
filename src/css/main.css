@@ -129,7 +129,7 @@ html{
   display: flex;
   width: 100vw;
   flex-direction: column;
-  animation:Gradient 8s ease infinite;
+  animation:Gradient 13s ease infinite;
   background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
   background-size: 500% 500%;
 }
@@ -145,23 +145,28 @@ html{
 }
 .accountCard{
 
-  width:80vw;
+  width:88vw;
   height:80px;
   display: flex;
   justify-self: flex-start;
   justify-content: flex-start;
   color:#fff;
   font-size: 1rem !important;
+  transition: 0.3s;
+  border-radius: 4px;
+  margin-bottom:10px;
 
 }
 .accountCard h3{
 
   font-size: 1.3rem;
+  user-select: none;
 }
 .accountCard h5{
   margin-top:1px;
   margin-left: 2px;
   font-size: 1.1rem;
+  user-select: none;
 }
 .accountCardImage{
   margin:10px;
@@ -169,6 +174,7 @@ html{
   height:60px;
   border-radius: 50%;
   justify-self: flex-start;
+  user-select: none;
 }
 .login-field input[type=text]:focus{
   border-bottom: 1px solid #aaa;

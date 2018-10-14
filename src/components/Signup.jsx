@@ -118,15 +118,19 @@ export default class Signup extends Component {
 						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
 					</div>
 				)
-			case 3:
-				return (
-					<div className="Login">
-						<h3 id="name">3 | Other accounts</h3>
-						<h4 id="subtext">Add Accounts</h4>
-						<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
-						<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
-					</div>
-				)
+				case 3:
+					return (
+						<div className="Login">
+							<h3 id="name">3 | Other accounts</h3>
+							<h4 id="subtext">Add Accounts</h4>
+							<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
+							<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
+						</div>
+					)
+				case 4:
+					return (
+						<Circles accounts={this.state.userAccounts}/>
+					)
 		}
 	}
 	render = () => {
@@ -142,3 +146,85 @@ export default class Signup extends Component {
 }
 
 
+class Circles extends Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			circles:{},
+			accounts:props.accounts,
+			selected:""
+		}
+	}
+
+	updateCircleSelection = (account) => {
+		let circles = Object.assign({}, this.state.circles)
+		let selected = this.state.selected;
+		if(circles && selected){
+			if(circles[selected] && circles[selected].includes(account)){
+				let index = circles[selected].indexOf(account)
+				circles[selected].splice(index,1)
+			}
+			else{
+				circles[selected].push(account)
+			}
+			this.setState({circles:circles})
+		}
+	}
+
+	changeCircle = (circle) => {
+		this.setState({selected:circle})
+	}
+
+	addCircle = () => {
+		let circles = Object.assign({}, this.state.circles)
+		circles[document.getElementById('add_circle').value] = []
+		this.setState({circles:circles})
+	}
+
+	render = () => {
+		let circles = []
+
+		Object.keys(this.state.circles).forEach((circle) =>{
+			if(circle == this.state.selected){
+				circles.push(<div key={circle} onClick={() => {this.changeCircle(circle)}} className="circle chosen" style={{backgroundColor:"rgba(255,255,255,0.3)", borderRadius:"10px"}}>
+					<p style={{paddingLeft:"10px"}}>{circle}</p>
+				</div>)
+			}
+			else{
+				circles.push(<div key={circle} onClick={() => {this.changeCircle(circle)}} className="circle" style={{backgroundColor:"rgba(255,255,255,0.1)", borderRadius:"10px"}}>
+					<p style={{paddingLeft:"10px"}}>{circle}</p>
+				</div>)
+			}
+		})
+
+		let accounts = []
+		Object.keys(this.state.accounts).forEach((account) =>{
+			if(this.state.circles[this.state.selected] && this.state.circles[this.state.selected].includes(account)){
+				accounts.push(<div key={account} onClick={()=>{this.updateCircleSelection(account)}} className="account chosen" style={{backgroundColor:"rgba(255,255,255,0.3)", borderRadius:"10px"}}>
+					<p style={{paddingLeft:"10px"}}>{account}</p>
+				</div>)
+			}
+			else{
+				accounts.push(<div key={account} onClick={()=>{this.updateCircleSelection(account)}} className="account" style={{backgroundColor:"rgba(255,255,255,0.1)", borderRadius:"10px"}}>
+					<p style={{paddingLeft:"10px"}}>{account}</p>
+				</div>)
+			}
+		})
+
+
+		return(
+			<div className="Connect Login">
+				<h3>Circles</h3>
+				<div>
+					<input id="add_circle" placeholder="personal"></input>
+					<button className="login-button waves-effect waves-light btn" onClick={() => {this.addCircle()}}>Add circle</button>
+				</div>
+				{circles}
+				<h3 style={{color:"white"}}>Accounts</h3>
+				{accounts}
+				<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
+				<a onClick={() => {}} className="login-button waves-effect waves-light btn">Done</a>
+			</div>
+		)
+	}		
+}

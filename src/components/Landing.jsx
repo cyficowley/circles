@@ -13,8 +13,9 @@ class Landing extends Component {
 					<h3>Circles</h3>
 				</div>
 				<div className="App">
-					<Link to="/login" className="login-button waves-effect waves-light btn">Account</Link>
-					<Link to="/account" className="login-button waves-effect waves-light btn">Scan</Link>
+					<h1>Discover your Circle</h1>
+					<Link to="/login" className="landing-button login-button waves-effect waves-light btn"><span>Account</span></Link>
+					<Link to="/account" className="landing-button login-button waves-effect waves-light btn"><span>Scan</span></Link>
 				</div>
 			</div>
     );

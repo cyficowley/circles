@@ -14,6 +14,7 @@ class Circles extends Component {
   }
 
   generateLink = (circle) => {
+    console.log("http://localhost:3000/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle)
     return "http://localhost:3000/connect?asdf=asdf&uid=" + this.props.uid + "&circle=" + circle
   }
 
@@ -66,6 +67,9 @@ class Circles extends Component {
                         )
                     })
                 }
+                <Link to='/account'>
+                  <div className="circle-item">Scan</div>
+                </Link>
             </div>
         </div>
     );

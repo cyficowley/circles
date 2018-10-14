@@ -28,14 +28,12 @@ export default class Signup extends Component {
 
 	}
 	listData = (data) => {
-		console.log(JSON.stringify(data))
 		Object.keys(data).forEach( account => {
 
 			data[account].splice(1,0,"")
 			
 		})
 
-		console.log(data)
 		this.setState({userAccounts:data})	
 	}
 	contains = (a, obj) => {
@@ -49,13 +47,11 @@ export default class Signup extends Component {
 	}
 	toggleCard = (e, account) => {
 
-		console.log(this.contains(this.state.selectedAccounts, account))
 
 		if(!this.contains(this.state.selectedAccounts, account)){
 			
 			this.setState({selectedAccounts:this.state.selectedAccounts.concat(account)})
 			
-			console.log(e.target.tagName)
 
 			if(e.target.tagName == "DIV"){
 				e.target.style.backgroundColor = "rgba(0,0,0,0.4)"
@@ -64,16 +60,13 @@ export default class Signup extends Component {
 		}
 		else{
 
-			console.log(e.target.tagName)
 
 
 			let array = this.state.selectedAccounts
 
 			array.splice(array.indexOf(account), 1)
 
-			console.log('hey wtf')
 
-			console.log(array)
 
 			this.setState({selectedAccounts:array})
 			if(e.target.tagName == "DIV"){
@@ -81,7 +74,6 @@ export default class Signup extends Component {
 			}
 
 		}
-		console.log(this.state.selectedAccounts)
 
 	
 		
@@ -132,19 +124,19 @@ export default class Signup extends Component {
 			case 2:
 					
 				if(!this.state.userAccounts){
-					let fake = {"Facebook":["https://www.facebook.com/ian.carrasco.92", "https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p320x320/38924326_10209758689724385_5704585307827994624_n.jpg?_nc_cat=101&oh=07e5fd0772dc9c567a0bab0b7c5f1b1f&oe=5C5DFF66"],
-							"Twitter" : ["https://twitter.com/ia_n_ai", "https://pbs.twimg.com/profile_images/1028139770474647552/ZtVPRnhO_400x400.jpg"], 
-							"Github" : ["https://github.com/IanCarrasco", undefined], 
-							"Linkedin" : [undefined, undefined]
-					}
-					setTimeout(() => {this.listData(fake)}, 500);
-					// fetch("http://localhost:5000/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
-					// 	result.json().then((data) => {
+					// let fake = {"Facebook":["https://www.facebook.com/ian.carrasco.92", "https://scontent-lax3-1.xx.fbcdn.net/v/t1.0-1/p320x320/38924326_10209758689724385_5704585307827994624_n.jpg?_nc_cat=101&oh=07e5fd0772dc9c567a0bab0b7c5f1b1f&oe=5C5DFF66"],
+					// 		"Twitter" : ["https://twitter.com/ia_n_ai", "https://pbs.twimg.com/profile_images/1028139770474647552/ZtVPRnhO_400x400.jpg"], 
+					// 		"Github" : ["https://github.com/IanCarrasco", undefined], 
+					// 		"Linkedin" : [undefined, undefined]
+					// }
+					// setTimeout(() => {this.listData(fake)}, 500);
+					fetch("https://circles-api.herokuapp.com/scraper/" + encodeURI(this.state.firstName + " " + this.state.lastName)).then((result) => {
+						result.json().then((data) => {
 	
-					// 			this.listData(data)
+								this.listData(data)
 							
-					// 	})
-					// })
+						})
+					})
 
 					
 				}
@@ -288,9 +280,11 @@ class Circles extends Component {
 		this.props.updateUID(uid)
 		if(this.cookies.get('connections')){
 			let connections = this.cookies.get('connections');
-			Object.keys(connections).forEach((other_uid) =>{
-				database.addConnection(uid,other_uid,Object.keys(connections.other_uid))
-			})
+			if(connections){
+				Object.keys(connections).forEach((other_uid) =>{
+					database.addConnection(uid,other_uid,Object.keys(connections[other_uid]), "")
+				})
+			}
 		}
 		setTimeout(() => {this.props.history.push("/circles")}, 500);
 	}

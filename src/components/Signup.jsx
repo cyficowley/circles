@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 export default class Signup extends Component {
 	constructor(props){
 		super(props)
-		this.state = {pageNo:1, firstName:"", lastName:"", profile:{}, userAccounts:[]}
+		this.state = {pageNo:1, firstName:"", lastName:"", userAccounts:[]}
 	}
 	componentWillMount = () => {
 

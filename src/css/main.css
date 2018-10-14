@@ -180,6 +180,12 @@ html{
 input{
   color:#fff;
 }
+
+.circles-home-name {
+  padding: 10px;
+  padding-left: 30px;
+  font-size: 48pt;
+}
 @keyframes Gradient {
     0% {
       background-position: 0% 50%

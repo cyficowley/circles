@@ -39,6 +39,14 @@ html{
   align-items: center;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: 100px;
+}
+.headerthing{
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  overflow: hidden;
 }
 .Login{
   padding:50px;
@@ -47,8 +55,8 @@ html{
   background: linear-gradient(45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB, purple);
   background-size: 500% 500%;
 }
-#login-button{
-  background-color: rgba(0,0,0,0.4);
+.login-button{
+  background-color: rgba(0,0,0,0.4) !important;
   margin:10px;
   margin-left:0px;
   

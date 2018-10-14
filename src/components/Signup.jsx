@@ -23,7 +23,7 @@ export default class Signup extends Component {
 						<h4 id="subtext">1 | Name</h4>
 						<input className="login-field" type="text" placeholder="First Name"></input>
 						<input id="password" className="login-field" type="text" placeholder="Last Name"></input>
-						<Link to="/signup/2" id="login-button" className="waves-effect waves-light btn">Next</Link>
+						<Link to="/signup/2" className="login-button waves-effect waves-light btn">Next</Link>
 					</div>
 				)
 			case 2:
@@ -31,8 +31,8 @@ export default class Signup extends Component {
 					<div className="Login">
 						<h4 id="subtext">2 | Social Accounts</h4>
 						<h4 id="subtext">Add Accounts</h4>
-						<Link to="/signup/1" id="login-button" className="waves-effect waves-light btn">Back</Link>
-						<Link to="/signup/3" id="login-button" className="waves-effect waves-light btn">Next</Link>
+						<Link to="/signup/1" className="login-button waves-effect waves-light btn">Back</Link>
+						<Link to="/signup/3" className="login-button waves-effect waves-light btn">Next</Link>
 					</div>
 				)
 			case 3:
@@ -40,8 +40,8 @@ export default class Signup extends Component {
 					<div className="Login">
 						<h3 id="name">Welcome to Circles</h3>
 						<h4 id="subtext">Add Accounts</h4>
-						<Link to="/signup/1" id="login-button" className="waves-effect waves-light btn">Back</Link>
-						<Link to="/signup/3" id="login-button" className="waves-effect waves-light btn">Next</Link>
+						<Link to="/signup/1" className="login-button waves-effect waves-light btn">Back</Link>
+						<Link to="/signup/3" className="login-button waves-effect waves-light btn">Next</Link>
 					</div>
 				)
 		}

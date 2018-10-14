@@ -7,11 +7,18 @@ import {Link} from 'react-router-dom'
 class Landing extends Component {
   render() {
     return (
-			<div className="App">
-				<Link to="/login"><img src={symbol}></img></Link>
+			<div>
+				<div className="headerthing">
+					<img style={{float:"left", transform:"scale(.5)"}} src={symbol}></img>
+					<h3>Circles</h3>
+				</div>
+				<div className="App">
+					<Link to="/login" className="login-button waves-effect waves-light btn">Account</Link>
+					<Link to="/account" className="login-button waves-effect waves-light btn">Scan</Link>
+				</div>
 			</div>
     );
-  }
+	}
 }
 
 export default Landing;

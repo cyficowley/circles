@@ -40,6 +40,7 @@ html{
   color:white;
   min-height: 100vh !important;
   height: auto !important;
+  justify-content: flex-start;
 }
 .item{
   background-color: rgba(0,0,0,0.1);
@@ -155,7 +156,42 @@ html{
   transition: 0.3s;
   border-radius: 4px;
   margin-bottom:10px;
+}
+.grid-container{
 
+  width:100vw;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 120px 120px 120px;
+  grid-template-rows: 120px 120px 120px;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: center;
+  margin-left:-4px;
+  
+
+}
+.circle-item{
+
+  width:120px;
+  height:120px;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.4);
+  justify-items: center;
+  line-height: 120px;
+  text-align: center;
+  text-overflow: ellipsis !important;
+  margin:20px;
+  margin-left: 0px;
+  margin-bottom: -50px;
+}
+.circles-home-name{
+  font-size: 4rem !important;
+  position: relative;
+  left:-2%;
+  margin-top: 50px;
 }
 .accountCard h3{
 

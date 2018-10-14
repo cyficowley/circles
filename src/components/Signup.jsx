@@ -53,10 +53,18 @@ export default class Signup extends Component {
 		if(!this.contains(this.state.selectedAccounts, account)){
 			
 			this.setState({selectedAccounts:this.state.selectedAccounts.concat(account)})
-			e.target.style.backgroundColor = "rgba(0,0,0,0.4)"
+			
+			console.log(e.target.tagName)
+
+			if(e.target.tagName == "DIV"){
+				e.target.style.backgroundColor = "rgba(0,0,0,0.4)"
+			}
 		
 		}
 		else{
+
+			console.log(e.target.tagName)
+
 
 			let array = this.state.selectedAccounts
 
@@ -67,8 +75,9 @@ export default class Signup extends Component {
 			console.log(array)
 
 			this.setState({selectedAccounts:array})
-
-			e.target.style.backgroundColor = "rgba(0,0,0,0)"
+			if(e.target.tagName == "DIV"){
+				e.target.style.backgroundColor = "rgba(0,0,0,0)"
+			}
 
 		}
 		console.log(this.state.selectedAccounts)
@@ -181,7 +190,7 @@ export default class Signup extends Component {
 			case 3:
 				return (
 					<div className="Login">
-						<h3 id="name">3 | Other Accounts</h3>
+						<h3 id="subtext">3 | Other Accounts</h3>
 						<h4 id="subtext">Add Accounts</h4>
 						<input id="account-type" className="login-field" type="text" placeholder="Account Type (i.e. Facebook, Instagram)"></input>
 						<input id="account-url" className="login-field" type="text" placeholder="Url"></input>
@@ -189,6 +198,8 @@ export default class Signup extends Component {
 
 						<button onClick={this.addAccount} className="login-button waves-effect waves-light btn">Add</button>
 						<a onClick={this.nextPage} className="login-button waves-effect waves-light btn">Next</a>
+						<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
+
 					</div>
 				)
 
@@ -199,7 +210,7 @@ export default class Signup extends Component {
 						userAccounts[key] = data[key]
 					})
 					return (
-						<Circles accounts={userAccounts} firstName={this.state.firstName} lastName={this.state.lastName}/>
+						<Circles accounts={userAccounts} prevPage={this.prevPage} firstName={this.state.firstName} lastName={this.state.lastName}/>
 					)
 		}
 	}
@@ -249,7 +260,10 @@ class Circles extends Component {
 		circles[document.getElementById('add_circle').value] = []
 		this.setState({circles:circles})
 	}
+	prevPage = () => {
 
+
+	}
 	finished = () => {
 		let uid = this.props.firstName + " " + this.props.lastName
 		let circles = {}
@@ -305,15 +319,15 @@ class Circles extends Component {
 
 		return(
 			<div className="Connect Login">
-				<h3>Circles</h3>
+				<h3 id="subtext">4 | Create Your Circles</h3>
 				<div>
-					<input id="add_circle" placeholder="personal"></input>
+					<input id="add_circle" placeholder="Circle Name (i.e. Work, Friends)"></input>
 					<button className="login-button waves-effect waves-light btn" onClick={() => {this.addCircle()}}>Add circle</button>
 				</div>
 				{circles}
-				<h3 style={{color:"white"}}>Accounts</h3>
+				<h3 id="subtext" style={{color:"white"}}>Accounts</h3>
 				{accounts}
-				<a onClick={this.prevPage} className="login-button waves-effect waves-light btn">Back</a>
+				<a onClick={this.props.prevPage} className="login-button waves-effect waves-light btn">Back</a>
 				<a onClick={() => {this.finished()}} className="login-button waves-effect waves-light btn">Done</a>
 			</div>
 		)

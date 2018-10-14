@@ -4,6 +4,7 @@ import { Object } from 'core-js';
 import {Link} from 'react-router-dom'
 import wci from './whitecircle.jpg'
 import { runInThisContext } from 'vm';
+import '../css/main.css'
 
 class Circles extends Component {
   constructor(props){
@@ -50,21 +51,16 @@ class Circles extends Component {
 
     return (
 		<div className="Connect Login" style={{padding:0}}>
-        <h3 className="circles-home-name">{this.props.uid + "'s Circles:"}</h3>
-        <ul>
+        <h3 id="subtext" className="circles-home-name">{this.props.uid.replace(/\b\w/g, l => l.toUpperCase()) + "'s Circles"}</h3>
+        <div className="grid-container">
             {
                 displayRows.map(circle => {
-
                     return (
-
-
-                        <li>{circle.name} - {circle.accounts}</li>
-
+                        <div className="circle-item">{circle.name}</div>
                     )
-
                 })
             }
-        </ul>
+        </div>
 			</div>
     );
   }

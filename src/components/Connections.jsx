@@ -13,6 +13,7 @@ class Connections extends Component {
     if(this.props.uid){
       console.log("getting firebase shit")
       database.getAllConnections(this.props.uid, (data) => {
+        console.log(data)
         this.setState({data:data})
       })
     }

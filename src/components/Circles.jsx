@@ -68,6 +68,9 @@ class Circles extends Component {
                         )
                     })
                 }
+                <Link to='/connections'>
+                  <div className="circle-item">Connections</div>
+                </Link>
                 <Link to='/account'>
                   <div className="circle-item">Scan</div>
                 </Link>
